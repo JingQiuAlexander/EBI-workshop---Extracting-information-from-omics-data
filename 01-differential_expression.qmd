@@ -347,31 +347,31 @@ length(brain_peaks)
 Here we load the mouse genome, then get sequences.
 
 ```{r}
-#| eval: true
+#| eval: false
 ah <- AnnotationHub()
 query(ah, c("Mus musculus","Ensembl","twobit"))
 mouse.genome = ah[["AH49773"]]
 ```
 
 ```{r}
-#| eval: true
+#| eval: false
 brain_peaks_Seqs = memes::get_sequence(brain_peaks, mouse.genome)
 liver_peaks_Seqs = memes::get_sequence(liver_peaks, mouse.genome)
 brain_peaks_Seqs 
 ```
 
 ```{r}
-#| eval: true
+#| eval: false
 dreme_out <- runDreme(brain_peaks_Seqs, liver_peaks_Seqs,outdir = tempdir())
 ```
 
 ```{r}
-#| eval: true
+#| eval: false
 dreme_out
 ```
 
 ```{r}
-#| eval: true
+#| eval: false
 dreme_out$motif %>% 
   purrr::map(universalmotif::view_motifs) %>% 
   purrr::imap(~{
@@ -384,7 +384,7 @@ dreme_out$motif %>%
 ```
 
 ```{r}
-#| eval: true
+#| eval: false
 # convert the top motif to a PWM matrix
 unknown_pwm   = convert_motifs(dreme_out$motif[[1]],"TFBSTools-PWMatrix")
 
@@ -428,7 +428,7 @@ head(pwm_library_dt)
 Is Nfe2l2/Nrf2 brain-specific in our RNA-Seq data?
 
 ```{r}
-#| eval: true
+#| eval: false
 as.data.frame(assay(ntd)) %>%
   filter(row.names(as.data.frame(assay(ntd))) %in% c("ENSMUSG00000015839"))
 ```
